@@ -1,4 +1,5 @@
-# Clean the workspace 
+# Clean the R console and workspace
+cat("\014") 
 rm(list = ls()) 
 
 # Loading library and data:
@@ -32,4 +33,16 @@ print(rbpcov2)
 # Calculate a jump and microstructure noise robust volatility measure
 # based on nonsynchronous data:
 rtscov = rTSCov(list(stock1,stock2));
+
+#Get sample daily Realized Volatility data
+data(realized_library); 
+DJI_RV = realized_library$Dow.Jones.Industrials.Realized.Variance; #Select DJI
+DJI_RV = DJI_RV[!is.na(DJI_RV)]; #Remove NA's
+DJI_RV = DJI_RV['2008'];
+plot(DJI_RV)
+x = harModel(data=DJI_RV , periods = c(1,5,22), RVest = c("rCov"), type="HARRV",h=1,transform=NULL);
+print(class(x));
+print (x);
+
+
 
