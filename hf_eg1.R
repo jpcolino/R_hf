@@ -1,10 +1,13 @@
 # Clean the R console and workspace
 cat("\014") 
 rm(list = ls()) 
+
 # store the current directory
 initial.dir<-getwd()
+
 # change to the new directory
-setwd("/Users/JPC/Google Drive/R_scr")
+setwd("/Users/JPC/Google Drive/R_scr/R_ts")
+
 # set the output file
 sink("R_ts_output1.out")
 
@@ -50,11 +53,12 @@ x = harModel(data=DJI_RV , periods = c(1,5,22), RVest = c("rCov"), type="HARRV",
 print(class(x));
 print (x);
 
-
 # close the output file
 sink()
+
 # unload the libraries
 detach("package:highfrequency")
+
 # change back to the original directory
 setwd(initial.dir)
 
